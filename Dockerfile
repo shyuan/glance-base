@@ -10,7 +10,7 @@ RUN git clone --branch ${GLANCE_VERSION} --depth 1 https://github.com/glanceapp/
 
 ARG TARGETOS
 ARG TARGETARCH
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-s -w" -o /glance .
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-s -w -X github.com/glanceapp/glance/internal/glance.buildVersion=${GLANCE_VERSION}" -o /glance .
 
 # Runtime stage
 FROM gcr.io/distroless/static-debian13
